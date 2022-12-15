@@ -30,7 +30,7 @@ namespace GameSokobanFinal
         private void InitializeComponent()
         {
             this.labelRecords = new System.Windows.Forms.Label();
-            this.buttonExitRecords = new System.Windows.Forms.Button();
+            this.ButtonExitRecords = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelRecords
@@ -44,17 +44,17 @@ namespace GameSokobanFinal
             this.labelRecords.TabIndex = 0;
             this.labelRecords.Text = "Топ (кол-во шагов):\r\n1. 1000\r\n";
             // 
-            // buttonExitRecords
+            // ButtonExitRecords
             // 
-            this.buttonExitRecords.BackColor = System.Drawing.Color.MediumSpringGreen;
-            this.buttonExitRecords.Font = new System.Drawing.Font("Modern No. 20", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonExitRecords.Location = new System.Drawing.Point(376, 528);
-            this.buttonExitRecords.Name = "buttonExitRecords";
-            this.buttonExitRecords.Size = new System.Drawing.Size(212, 60);
-            this.buttonExitRecords.TabIndex = 3;
-            this.buttonExitRecords.Text = "Назад";
-            this.buttonExitRecords.UseVisualStyleBackColor = false;
-            this.buttonExitRecords.Click += new System.EventHandler(this.buttonExitRecords_Click);
+            this.ButtonExitRecords.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.ButtonExitRecords.Font = new System.Drawing.Font("Modern No. 20", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonExitRecords.Location = new System.Drawing.Point(376, 528);
+            this.ButtonExitRecords.Name = "ButtonExitRecords";
+            this.ButtonExitRecords.Size = new System.Drawing.Size(212, 60);
+            this.ButtonExitRecords.TabIndex = 3;
+            this.ButtonExitRecords.Text = "Назад";
+            this.ButtonExitRecords.UseVisualStyleBackColor = false;
+            this.ButtonExitRecords.Click += new System.EventHandler(this.ButtonExitRecords_Click);
             // 
             // RecordsForm
             // 
@@ -62,7 +62,7 @@ namespace GameSokobanFinal
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::GameSokobanFinal.Properties.Resources.fonNG;
             this.ClientSize = new System.Drawing.Size(600, 600);
-            this.Controls.Add(this.buttonExitRecords);
+            this.Controls.Add(this.ButtonExitRecords);
             this.Controls.Add(this.labelRecords);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "RecordsForm";
@@ -76,6 +76,6 @@ namespace GameSokobanFinal
         #endregion
 
         private System.Windows.Forms.Label labelRecords;
-        private System.Windows.Forms.Button buttonExitRecords;
+        private System.Windows.Forms.Button ButtonExitRecords;
     }
 }

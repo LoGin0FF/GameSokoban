@@ -16,8 +16,7 @@ namespace GameSokobanFinal
         {
             InitializeComponent();
         }
-
-        private void buttonOK_Click(object sender, EventArgs e)
+        private void ButtonOK_Click(object sender, EventArgs e)
         {
             this.Close();
         }

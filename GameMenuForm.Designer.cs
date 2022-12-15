@@ -51,7 +51,7 @@ namespace GameSokobanFinal
             this.startGameButton.TabIndex = 0;
             this.startGameButton.Text = "Старт";
             this.startGameButton.UseVisualStyleBackColor = false;
-            this.startGameButton.Click += new System.EventHandler(this.startGameButton_Click);
+            this.startGameButton.Click += new System.EventHandler(this.ButtonStartGame_Click);
             // 
             // buttonExit
             // 
@@ -68,7 +68,7 @@ namespace GameSokobanFinal
             this.buttonExit.TabIndex = 1;
             this.buttonExit.Text = "Выход";
             this.buttonExit.UseVisualStyleBackColor = false;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            this.buttonExit.Click += new System.EventHandler(this.ButtonExit_Click);
             // 
             // buttonHelp
             // 
@@ -85,7 +85,7 @@ namespace GameSokobanFinal
             this.buttonHelp.TabIndex = 2;
             this.buttonHelp.Text = "Правила";
             this.buttonHelp.UseVisualStyleBackColor = false;
-            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
+            this.buttonHelp.Click += new System.EventHandler(this.ButtonHelp_Click);
             // 
             // ButtonRecords
             // 

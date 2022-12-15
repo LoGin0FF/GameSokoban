@@ -25,8 +25,7 @@ namespace GameSokobanFinal
                 }
             }
         }
-
-        private void buttonExitRecords_Click(object sender, EventArgs e)
+        private void ButtonExitRecords_Click(object sender, EventArgs e)
         {
             this.Close();
         }

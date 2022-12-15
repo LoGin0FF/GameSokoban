@@ -14,17 +14,18 @@ namespace GameSokobanFinal
 {
     public partial class GameForm : Form
     {
-        const string GitHub = "GitHub Hello";
         const int size = 50;
-        List<Player> player = new List<Player>();
+        public new const int Width = 1560;
+        public new const int Height = 1120;
+
+        Player player;
         List<Bricks> bricks = new List<Bricks>();
         List<Wall> wall = new List<Wall>();
         List<Cross> cross = new List<Cross>();
+
         public int count_Move = 0; //кол-во ходов (для рекордов)
-        public char rememberMove = 'N';
-        public int rememberBricks = -1;
-        public bool CanBack = false;
-        bool flag = false;
+ 
+        bool flag = false; //для "анимации"
         int countFlag = 0;
         public GameForm(string Level)
         {
@@ -46,21 +47,19 @@ namespace GameSokobanFinal
         {
             Graphics graphics = e.Graphics;
 
-            foreach (var p in player)
-            {
-                graphics.DrawImage(p.playerImage, p.x, p.y, size, size); //двигаемый объект
-            }
+            graphics.DrawImage(player.playerImage, player.x, player.y, size, size); 
+
             foreach (var w in wall)
             {
-                graphics.DrawImage(w.wallImage, w.x, w.y, size, size); //двигаемый объект
+                graphics.DrawImage(w.wallImage, w.x, w.y, size, size); 
             }
             foreach (var c in cross)
             {
-                graphics.DrawImage(c.crossImage, c.x, c.y, size, size); //двигаемый объект
+                graphics.DrawImage(c.crossImage, c.x, c.y, size, size); 
             }
             foreach (var b in bricks)
             {
-                graphics.DrawImage(b.bricksImage, b.x, b.y, size, size); //двигаемый объект
+                graphics.DrawImage(b.bricksImage, b.x, b.y, size, size);
             }
         }
 
@@ -82,7 +81,6 @@ namespace GameSokobanFinal
 
             Invalidate();
         }
-
         public void Press(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -91,12 +89,9 @@ namespace GameSokobanFinal
                     int W = CheckMoveBox('W');
                     if (W != -1)
                     {
-                        if (player[0].Move(0, -50, bricks[W], wall))
+                        if (player.Move(0, -50, bricks[W], wall))
                         {
-                            Movement(ref count_Move, 1);
-                            rememberMove = 'S';
-                            rememberBricks = W;
-                            CanBack = true;
+                            Movement(ref count_Move); 
                         }
                         GameOver();
                     }
@@ -105,12 +100,9 @@ namespace GameSokobanFinal
                     int S = CheckMoveBox('S');
                     if (S != -1)
                     {
-                        if (player[0].Move(0, 50, bricks[S], wall))
+                        if (player.Move(0, 50, bricks[S], wall))
                         {
-                            Movement(ref count_Move, 1);
-                            rememberMove = 'W';
-                            rememberBricks = S;
-                            CanBack = true;
+                            Movement(ref count_Move);
                         }
                         GameOver();
                     }
@@ -119,12 +111,9 @@ namespace GameSokobanFinal
                     int A = CheckMoveBox('A');
                     if (A != -1)
                     {
-                        if (player[0].Move(-50, 0, bricks[A], wall))
+                        if (player.Move(-50, 0, bricks[A], wall))
                         {
-                            Movement(ref count_Move, 1);
-                            rememberMove = 'D';
-                            rememberBricks = A;
-                            CanBack = true;
+                            Movement(ref count_Move);
                         }
                         GameOver();
                     }
@@ -133,48 +122,13 @@ namespace GameSokobanFinal
                     int D = CheckMoveBox('D');
                     if (D != -1)
                     {
-                        if (player[0].Move(50, 0, bricks[D], wall))
+                        if (player.Move(50, 0, bricks[D], wall))
                         {
-                            Movement(ref count_Move, 1);
-                            rememberMove = 'A';
-                            rememberBricks = D;
-                            CanBack = true;
+                            Movement(ref count_Move);
                         }
                         GameOver();
                     }
                     break;
-                case Keys.Z:
-                    if (CanBack)
-                    {
-                        switch (rememberMove)
-                        {
-                            case 'W':
-                                player[0].Move(0, -50);
-                                if (rememberBricks != 0 && rememberBricks != -1)
-                                    bricks[rememberBricks].Move(0, -50);
-                                break;
-                            case 'S':
-                                player[0].Move(0, 50);
-                                if (rememberBricks != 0 && rememberBricks != -1)
-                                    bricks[rememberBricks].Move(0, 50);
-                                break;
-                            case 'A':
-                                player[0].Move(-50, 0);
-                                if (rememberBricks != 0 && rememberBricks != -1)
-                                    bricks[rememberBricks].Move(-50, 0);
-                                break;
-                            case 'D':
-                                player[0].Move(50, 0);
-                                if (rememberBricks != 0 && rememberBricks != -1)
-                                    bricks[rememberBricks].Move(50, 0);
-                                break;
-                            default: break;
-                        }
-                        Movement(ref count_Move, -1);
-                        CanBack = false;
-                        break;
-                    }
-                    else break;
                 default:
                     break;
             }
@@ -191,7 +145,7 @@ namespace GameSokobanFinal
                     int flag = 0; //0 - ящик вообще не двигали, 1 - ящик подвинули, 2 - ящик подвинуть нельзя
                     for (i = 0; i < bricks.Count; i++) //проверка каждого ящика
                     {
-                        if (player[0].y - 50 == bricks[i].y && player[0].x == bricks[i].x) //если игрок двигается "в ящик"
+                        if (player.y - 50 == bricks[i].y && player.x == bricks[i].x) //если игрок двигается "в ящик"
                         {
                             if (bricks[i].y == 0) { flag = 2; break; };
                             flagMove = 0;
@@ -224,8 +178,8 @@ namespace GameSokobanFinal
                     int flagS = 0;
                     for (iS = 0; iS < bricks.Count; iS++)
                     {
-                        if (bricks[iS].y == 3000) { flagS = 2; break; };
-                        if (player[0].y + 50 == bricks[iS].y && player[0].x == bricks[iS].x)
+                        if (bricks[iS].y == Height) { flagS = 2; break; };
+                        if (player.y + 50 == bricks[iS].y && player.x == bricks[iS].x)
                         {
                             flagMove = 0;
                             for (int m = 0; m < bricks.Count; m++)
@@ -257,7 +211,7 @@ namespace GameSokobanFinal
                     for (iA = 0; iA < bricks.Count; iA++)
                     {
                         if (bricks[iA].x == 0) { flagA = 2; break; };
-                        if (player[0].x - 50 == bricks[iA].x && player[0].y == bricks[iA].y)
+                        if (player.x - 50 == bricks[iA].x && player.y == bricks[iA].y)
                         {
                             flagMove = 0;
                             for (int m = 0; m < bricks.Count; m++)
@@ -288,8 +242,8 @@ namespace GameSokobanFinal
                     int flagD = 0;
                     for (iD = 0; iD < bricks.Count; iD++)
                     {
-                        if (bricks[iD].x == 3000) { flagD = 2; break; };
-                        if (player[0].x + 50 == bricks[iD].x && player[0].y == bricks[iD].y)
+                        if (bricks[iD].x == Width) { flagD = 2; break; };
+                        if (player.x + 50 == bricks[iD].x && player.y == bricks[iD].y)
                         {
                             flagMove = 0;
                             for (int m = 0; m < bricks.Count; m++)
@@ -343,7 +297,7 @@ namespace GameSokobanFinal
                         }
                         else if (r == 'P')
                         {
-                            player.Add(new Player(x, y));
+                            player = new Player(x, y);
                         }
                         x += 50;
                         if (r == '\n')
@@ -372,6 +326,7 @@ namespace GameSokobanFinal
             }
             if (flagWin == cross.Count)
             {
+                timer.Stop();
                 GameOverForm gameOver = new GameOverForm(ref count_Move);
                 RecordLevels(ref count_Move);
                 gameOver.Show();
@@ -397,10 +352,9 @@ namespace GameSokobanFinal
             }
         }
 
-        public void Movement(ref int count_move, int plus)
+        public void Movement(ref int count_move)
         {
-            count_Move += plus;
-            CountMove.Text = "Шагов: " + count_Move;
+            CountMove.Text = "Шагов: " + ++count_Move;
         }
     }
 }

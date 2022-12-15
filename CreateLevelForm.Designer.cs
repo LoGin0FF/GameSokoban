@@ -46,7 +46,7 @@ namespace GameSokobanFinal
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(582, 472);
             this.textBox.TabIndex = 0;
-            this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.textBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PressTextBox);
             // 
             // label1

@@ -14,4 +14,3 @@ C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSo
 C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.GameOverForm.resources
 C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.RecordsForm.resources
 C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.CreateLevelForm.resources
-C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.FormName.resources

@@ -16,30 +16,25 @@ namespace GameSokobanFinal
         {
             InitializeComponent();
         }
-
-        private void startGameButton_Click(object sender, EventArgs e)
+        private void ButtonStartGame_Click(object sender, EventArgs e)
         {
             LevelMenu gameWindow = new LevelMenu();
             gameWindow.Show();
         }
-
-        private void buttonExit_Click(object sender, EventArgs e)
+        private void ButtonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
-        private void buttonHelp_Click(object sender, EventArgs e)
+        private void ButtonHelp_Click(object sender, EventArgs e)
         {
             HelpGameMenu gameWindow = new HelpGameMenu();
             gameWindow.Show();
         }
-
         private void ButtonRecords_Click(object sender, EventArgs e)
         {
             RecordsForm gameWindow = new RecordsForm();
             gameWindow.Show();
         }
-
         private void ButtonCreateLevel_Click(object sender, EventArgs e)
         {
             CreateLevelForm gameWindow = new CreateLevelForm();

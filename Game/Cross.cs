@@ -12,10 +12,9 @@ namespace GameSokobanFinal.Game
         #region [Fields]
         public int x;
         public int y;
-        const int size = 50;
 
         public Image crossImage;
-        private string stringImage = "C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Image\\ChristmasTreeWhite.png";
+        private readonly string stringImage = "C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Image\\ChristmasTreeWhite.png";
         #endregion
         public Cross(int x, int y)
         {

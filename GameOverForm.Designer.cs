@@ -43,7 +43,7 @@ namespace GameSokobanFinal
             this.buttonNextLevel.TabIndex = 1;
             this.buttonNextLevel.Text = "Выбрать следующий уровень";
             this.buttonNextLevel.UseVisualStyleBackColor = false;
-            this.buttonNextLevel.Click += new System.EventHandler(this.buttonNextLevel_Click);
+            this.buttonNextLevel.Click += new System.EventHandler(this.ButtonNextLevel_Click);
             // 
             // labelCountMove
             // 

@@ -18,8 +18,7 @@ namespace GameSokobanFinal
             InitializeComponent();
             labelCountMove.Text = "Ты прошел уровень за " + count_Move + " шагов!";
         }
-
-        private void buttonNextLevel_Click(object sender, EventArgs e)
+        private void ButtonNextLevel_Click(object sender, EventArgs e)
         {
             this.Close();
             LevelMenu gameform = new LevelMenu();

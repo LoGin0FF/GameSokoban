@@ -12,10 +12,9 @@ namespace GameSokobanFinal.Game
         #region [Fields]
         public int x;
         public int y;
-        const int size = 50;
 
         public Image playerImage;
-        private string stringImage = "C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Image\\FatherChristmas.png";
+        private readonly string stringImage = "C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Image\\FatherChristmas.png";
         #endregion
         public Player(int x, int y)
         {
@@ -28,7 +27,7 @@ namespace GameSokobanFinal.Game
             int xTemp = x + dirX;
             int yTemp = y + dirY;
             bool flag = true;
-            if (xTemp <= 1200 && xTemp >= 0 && (xTemp != bricks.x || yTemp != bricks.y))
+            if (xTemp <= GameForm.Width && xTemp >= 0 && (xTemp != bricks.x || yTemp != bricks.y))
             {
                 for (int i = 0; i < wall.Count; i++)
                 {
@@ -38,9 +37,9 @@ namespace GameSokobanFinal.Game
                         break;
                     }
                 }
-                if (flag) x += dirX;
+                if (flag) x = xTemp;
             }
-            if (yTemp <= 850 && yTemp >= 0 && (xTemp != bricks.x || yTemp != bricks.y))
+            if (yTemp <= GameForm.Height && yTemp >= 0 && (xTemp != bricks.x || yTemp != bricks.y))
             {
                 for (int i = 0; i < wall.Count; i++)
                 {
@@ -50,7 +49,7 @@ namespace GameSokobanFinal.Game
                         break;
                     }
                 }
-                if (flag) y += dirY;
+                if (flag) y = yTemp;
             }
             return flag;
         }

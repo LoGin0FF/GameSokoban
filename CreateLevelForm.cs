@@ -17,8 +17,7 @@ namespace GameSokobanFinal
         {
             InitializeComponent();
         }
-
-        private void textBox_TextChanged(object sender, EventArgs e)
+        private void TextBox_TextChanged(object sender, EventArgs e)
         {
             string filename = "C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\MyLevel.dat";
             FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
@@ -27,7 +26,6 @@ namespace GameSokobanFinal
             sw.Close();
             fs.Close();
         }
-
         private void PressTextBox(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 'X' && e.KeyChar != 'P' && e.KeyChar != 'C' && e.KeyChar != 'E' && e.KeyChar != (char)Keys.Enter && e.KeyChar != (char)Keys.Back)
@@ -35,7 +33,6 @@ namespace GameSokobanFinal
                 e.Handled = true;
             }
         }
-
         private void ButtonLevel_4_Click(object sender, EventArgs e)
         {
             this.Close();

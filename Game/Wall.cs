@@ -12,10 +12,9 @@ namespace GameSokobanFinal.Game
         #region [Fields]
         public int x;
         public int y;
-        const int size = 50;
 
         public Image wallImage;
-        private string stringImage = "C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Image\\Snowdrift.png";
+        private readonly string stringImage = "C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Image\\Snowdrift.png";
         #endregion
         public Wall(int x, int y)
         {

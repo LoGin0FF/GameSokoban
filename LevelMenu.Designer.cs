@@ -64,7 +64,7 @@ namespace GameSokobanFinal
             this.buttonLevel_2.TabIndex = 1;
             this.buttonLevel_2.Text = "Уровень 2";
             this.buttonLevel_2.UseVisualStyleBackColor = false;
-            this.buttonLevel_2.Click += new System.EventHandler(this.buttonLevel_2_Click_1);
+            this.buttonLevel_2.Click += new System.EventHandler(this.ButtonLevel_2_Click);
             // 
             // buttonExit
             // 
@@ -76,7 +76,7 @@ namespace GameSokobanFinal
             this.buttonExit.TabIndex = 2;
             this.buttonExit.Text = "Назад";
             this.buttonExit.UseVisualStyleBackColor = false;
-            this.buttonExit.Click += new System.EventHandler(this.button1_Click);
+            this.buttonExit.Click += new System.EventHandler(this.ButtonExit);
             // 
             // ButtonLevel_3
             // 
@@ -88,7 +88,7 @@ namespace GameSokobanFinal
             this.ButtonLevel_3.TabIndex = 3;
             this.ButtonLevel_3.Text = "Уровень 3";
             this.ButtonLevel_3.UseVisualStyleBackColor = false;
-            this.ButtonLevel_3.Click += new System.EventHandler(this.button2_Click);
+            this.ButtonLevel_3.Click += new System.EventHandler(this.ButtonLevel_3_Click);
             // 
             // ButtonLevel_4
             // 

@@ -1,0 +1,17 @@
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\bin\Debug\GameSokobanFinal.exe.config
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\bin\Debug\GameSokobanFinal.exe
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\bin\Debug\GameSokobanFinal.pdb
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.csproj.AssemblyReference.cache
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.GameForm.resources
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.Properties.Resources.resources
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.csproj.GenerateResource.cache
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.csproj.CoreCompileInputs.cache
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.exe
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.pdb
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.GameMenuForm.resources
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.HelpGameMenu.resources
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.LevelMenu.resources
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.GameOverForm.resources
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.RecordsForm.resources
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.CreateLevelForm.resources
+C:\Users\4859554\source\repos\GameSokobanFinal\GameSokobanFinal\obj\Debug\GameSokobanFinal.FormName.resources

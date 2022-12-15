@@ -14,6 +14,7 @@ namespace GameSokobanFinal
 {
     public partial class GameForm : Form
     {
+        const string GitHub = "GitHub Hello";
         const int size = 50;
         List<Player> player = new List<Player>();
         List<Bricks> bricks = new List<Bricks>();

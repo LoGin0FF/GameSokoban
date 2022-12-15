@@ -33,6 +33,7 @@ namespace GameSokobanFinal
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.CountMove = new System.Windows.Forms.Label();
+            this.labelRestart = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // timer
@@ -52,6 +53,19 @@ namespace GameSokobanFinal
             this.CountMove.Text = "Шагов: 0";
             this.CountMove.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // labelRestart
+            // 
+            this.labelRestart.AutoSize = true;
+            this.labelRestart.BackColor = System.Drawing.Color.Black;
+            this.labelRestart.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRestart.ForeColor = System.Drawing.Color.Maroon;
+            this.labelRestart.Location = new System.Drawing.Point(1105, 19);
+            this.labelRestart.Name = "labelRestart";
+            this.labelRestart.Size = new System.Drawing.Size(188, 29);
+            this.labelRestart.TabIndex = 1;
+            this.labelRestart.Text = "ESC - Рестарт";
+            this.labelRestart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -59,6 +73,7 @@ namespace GameSokobanFinal
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1542, 1055);
+            this.Controls.Add(this.labelRestart);
             this.Controls.Add(this.CountMove);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -77,6 +92,7 @@ namespace GameSokobanFinal
 
         private System.Windows.Forms.Timer timer;
         public System.Windows.Forms.Label CountMove;
+        public System.Windows.Forms.Label labelRestart;
     }
 }
 

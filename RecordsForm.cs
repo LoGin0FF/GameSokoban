@@ -18,7 +18,7 @@ namespace GameSokobanFinal
             InitializeComponent();
             if (File.Exists("records.dat"))
             {
-                using (BinaryReader read = new BinaryReader(File.Open("records.dat", FileMode.Open)))
+                using (BinaryReader read = new BinaryReader(File.Open("records.dat", FileMode.OpenOrCreate)))
                 {
                     int Text = read.ReadInt32();
                     labelRecords.Text = "Топ (кол-во шагов): \n" + Text;

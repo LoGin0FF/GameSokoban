@@ -17,6 +17,7 @@ namespace GameSokobanFinal
         const int size = 50;
         public new const int Width = 1560;
         public new const int Height = 1120;
+        private readonly string LevelReference;
 
         Player player;
         List<Bricks> bricks = new List<Bricks>();
@@ -34,6 +35,8 @@ namespace GameSokobanFinal
             timer.Tick += new System.EventHandler(Update);
 
             KeyDown += new KeyEventHandler(Press);
+
+            LevelReference = Level;
 
             Init(Level);
         }
@@ -91,7 +94,7 @@ namespace GameSokobanFinal
                     {
                         if (player.Move(0, -50, bricks[W], wall))
                         {
-                            Movement(ref count_Move); 
+                            Movement(); 
                         }
                         GameOver();
                     }
@@ -102,7 +105,7 @@ namespace GameSokobanFinal
                     {
                         if (player.Move(0, 50, bricks[S], wall))
                         {
-                            Movement(ref count_Move);
+                            Movement();
                         }
                         GameOver();
                     }
@@ -113,7 +116,7 @@ namespace GameSokobanFinal
                     {
                         if (player.Move(-50, 0, bricks[A], wall))
                         {
-                            Movement(ref count_Move);
+                            Movement();
                         }
                         GameOver();
                     }
@@ -124,10 +127,15 @@ namespace GameSokobanFinal
                     {
                         if (player.Move(50, 0, bricks[D], wall))
                         {
-                            Movement(ref count_Move);
+                            Movement();
                         }
                         GameOver();
                     }
+                    break;
+                case Keys.Escape:
+                    GameForm gameWindow = new GameForm(LevelReference);
+                    this.Close();
+                    gameWindow.Show();
                     break;
                 default:
                     break;
@@ -326,13 +334,12 @@ namespace GameSokobanFinal
             }
             if (flagWin == cross.Count)
             {
-                timer.Stop();
                 GameOverForm gameOver = new GameOverForm(ref count_Move);
-                RecordLevels(ref count_Move);
+                RecordLevels();
                 gameOver.Show();
             }
         }
-        public void RecordLevels(ref int count_Move)
+        public void RecordLevels()
         {
             bool flag = false;
             string filename = "records.dat";
@@ -342,17 +349,18 @@ namespace GameSokobanFinal
                 {
                     int count_Move_Ref = int.MaxValue;
                     while (read.PeekChar() != -1)
-                        count_Move_Ref = read.ReadInt32();    
+                    {
+                        count_Move_Ref = read.ReadInt32();
+                    }
                     if (count_Move_Ref > count_Move) flag = true;
                 }
-                if (flag) using (BinaryWriter write = new BinaryWriter(File.Open(filename, FileMode.Open)))
+                if (flag) using (BinaryWriter write = new BinaryWriter(File.Open(filename, FileMode.OpenOrCreate)))
                 {
                     write.Write(count_Move);
                 }
             }
         }
-
-        public void Movement(ref int count_move)
+        public void Movement()
         {
             CountMove.Text = "Шагов: " + ++count_Move;
         }

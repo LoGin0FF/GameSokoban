@@ -20,7 +20,13 @@ namespace GameSokobanFinal
         }
         private void ButtonNextLevel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+            {
+                if (Application.OpenForms[i].Name != "GameMenuForm")
+                {
+                    Application.OpenForms[i].Close();
+                }
+            }
             LevelMenu gameform = new LevelMenu();
             gameform.Show();
         }

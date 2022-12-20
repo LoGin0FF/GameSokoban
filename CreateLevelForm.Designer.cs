@@ -41,10 +41,10 @@ namespace GameSokobanFinal
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox.BackColor = System.Drawing.Color.WhiteSmoke;
             this.textBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox.Location = new System.Drawing.Point(0, 83);
+            this.textBox.Location = new System.Drawing.Point(0, 92);
             this.textBox.Multiline = true;
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(582, 472);
+            this.textBox.Size = new System.Drawing.Size(582, 463);
             this.textBox.TabIndex = 0;
             this.textBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PressTextBox);
@@ -55,10 +55,10 @@ namespace GameSokobanFinal
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(90, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(426, 60);
+            this.label1.Size = new System.Drawing.Size(427, 80);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Создайте свой уровень! \r\nX - препятствие, P - игрок, E - ёлка, C - цель\r\nВводите " +
-    "в поле ниже: \r\n";
+            this.label1.Text = "Создайте свой уровень! \r\nX - препятствие, P - игрок, E - ёлка, C - цель\r\nSpace - " +
+    "пустота, BackSpace - стереть символ\r\nВводите в поле ниже: \r\n";
             // 
             // ButtonExitCreate
             // 

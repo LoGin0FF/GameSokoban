@@ -28,7 +28,7 @@ namespace GameSokobanFinal
         }
         private void PressTextBox(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar != 'X' && e.KeyChar != 'P' && e.KeyChar != 'C' && e.KeyChar != 'E' && e.KeyChar != (char)Keys.Enter && e.KeyChar != (char)Keys.Back)
+            if (e.KeyChar != 'X' && e.KeyChar != 'P' && e.KeyChar != 'C' && e.KeyChar != 'E' && e.KeyChar != (char)Keys.Enter && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Space)
             {
                 e.Handled = true;
             }

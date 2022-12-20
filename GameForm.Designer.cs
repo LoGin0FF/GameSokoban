@@ -38,7 +38,7 @@ namespace GameSokobanFinal
             // 
             // timer
             // 
-            this.timer.Interval = 50;
+            this.timer.Interval = 40;
             // 
             // CountMove
             // 

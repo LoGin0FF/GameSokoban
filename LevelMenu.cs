@@ -18,31 +18,31 @@ namespace GameSokobanFinal
         }
         private void ButtonLevel_1_Click(object sender, EventArgs e)
         {
-            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\Level_1.dat");
+            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\Level_1.dat", 1);
             this.Close();
             gameform.Show();
         }
         private void ButtonLevel_2_Click(object sender, EventArgs e)
         {
-            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\Level_2.dat");
+            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\Level_2.dat", 2);
             this.Close();
             gameform.Show();
         }
         private void ButtonLevel_3_Click(object sender, EventArgs e)
         {
-            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\Level_3.dat");
+            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\Level_3.dat", 3);
             this.Close();
             gameform.Show();
         }
         private void ButtonLevel_4_Click(object sender, EventArgs e)
         {
-            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\Level_4.dat");
+            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\Level_4.dat", 4);
             this.Close();
             gameform.Show();
         }
         private void ButtonMyLevel_Click(object sender, EventArgs e)
         {
-            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\MyLevel.dat");
+            GameForm gameform = new GameForm("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Levels\\MyLevel.dat", 5);
             this.Close();
             gameform.Show();
         }

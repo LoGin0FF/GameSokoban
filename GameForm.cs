@@ -12,8 +12,14 @@ using GameSokobanFinal.Game;
 
 namespace GameSokobanFinal
 {
-    public partial class GameForm : Form
+    struct Info
     {
+        public int Count_Move; //кол-во ходов (для рекордов)
+        public int Level; //запоминает уровень
+        public string Name;
+    }
+    public partial class GameForm : Form
+    {       
         const int size = 50;
         public new const int Width = 1560;
         public new const int Height = 1120;
@@ -23,11 +29,23 @@ namespace GameSokobanFinal
         List<Bricks> bricks = new List<Bricks>();
         List<Wall> wall = new List<Wall>();
         List<Cross> cross = new List<Cross>();
+        Info info = new Info();
 
-        public int count_Move = 0; //кол-во ходов (для рекордов)
- 
         bool flag = false; //для "анимации"
         int countFlag = 0;
+        public GameForm(string Level, int lvl)
+        {
+            InitializeComponent();
+
+            timer.Tick += new System.EventHandler(Update);
+
+            KeyDown += new KeyEventHandler(Press);
+            LevelReference = Level;
+            info.Level = lvl;
+            info.Name = "Kirill";
+
+            Init(Level);
+        }
         public GameForm(string Level)
         {
             InitializeComponent();
@@ -36,11 +54,8 @@ namespace GameSokobanFinal
 
             KeyDown += new KeyEventHandler(Press);
 
-            LevelReference = Level;
-
             Init(Level);
         }
-
         public void Init(string Level) //Инициализация игры, создание экземпляров класса
         {
             LoadLevels(Level);
@@ -332,37 +347,31 @@ namespace GameSokobanFinal
                     }
                 }
             }
-            if (flagWin == cross.Count)
+            if (flagWin == 1)//cross.Count)
             {
-                GameOverForm gameOver = new GameOverForm(ref count_Move);
+                RecordsForm rf = new RecordsForm();
+                GameOverForm gameOver = new GameOverForm(ref info.Count_Move);
                 RecordLevels();
+                rf.AddCurrentScores();
                 gameOver.Show();
             }
         }
         public void RecordLevels()
         {
-            bool flag = false;
-            string filename = "records.dat";
+            string filename = "recordsNew.dat";
             if (File.Exists(filename))
             {
-                using (BinaryReader read = new BinaryReader(File.Open(filename, FileMode.Open)))
+                using (BinaryWriter write = new BinaryWriter(File.Open(filename, FileMode.OpenOrCreate)))
                 {
-                    int count_Move_Ref = int.MaxValue;
-                    while (read.PeekChar() != -1)
-                    {
-                        count_Move_Ref = read.ReadInt32();
-                    }
-                    if (count_Move_Ref > count_Move) flag = true;
-                }
-                if (flag) using (BinaryWriter write = new BinaryWriter(File.Open(filename, FileMode.OpenOrCreate)))
-                {
-                    write.Write(count_Move);
+                    write.Write(info.Level);
+                    write.Write(info.Name);
+                    write.Write(info.Count_Move);
                 }
             }
         }
         public void Movement()
         {
-            CountMove.Text = "Шагов: " + ++count_Move;
+            CountMove.Text = "Шагов: " + ++info.Count_Move;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace GameSokobanFinal
 
         bool flag = false; //для "анимации"
         int countFlag = 0;
-        public GameForm(string Level, int lvl)
+        public GameForm(string Level, int lvl, string Name)
         {
             InitializeComponent();
 
@@ -42,7 +42,7 @@ namespace GameSokobanFinal
             KeyDown += new KeyEventHandler(Press);
             LevelReference = Level;
             info.Level = lvl;
-            info.Name = "Kirill";
+            info.Name = Name;
 
             Init(Level);
         }
@@ -350,7 +350,7 @@ namespace GameSokobanFinal
             if (flagWin == 1)//cross.Count)
             {
                 RecordsForm rf = new RecordsForm();
-                GameOverForm gameOver = new GameOverForm(ref info.Count_Move);
+                GameOverForm gameOver = new GameOverForm(ref info.Count_Move, info.Name);
                 RecordLevels();
                 rf.AddCurrentScores();
                 gameOver.Show();
@@ -361,10 +361,10 @@ namespace GameSokobanFinal
             string filename = "recordsNew.dat";
             if (File.Exists(filename))
             {
-                using (BinaryWriter write = new BinaryWriter(File.Open(filename, FileMode.OpenOrCreate)))
+                using (BinaryWriter write = new BinaryWriter(File.Open(filename, FileMode.Open)))
                 {
-                    write.Write(info.Level);
                     write.Write(info.Name);
+                    write.Write(info.Level);
                     write.Write(info.Count_Move);
                 }
             }

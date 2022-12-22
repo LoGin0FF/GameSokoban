@@ -13,9 +13,11 @@ namespace GameSokobanFinal
 {
     public partial class GameOverForm : Form
     {
-        public GameOverForm(ref int count_Move)
+        public new string Name;
+        public GameOverForm(ref int count_Move, string Name)
         {
             InitializeComponent();
+            this.Name = Name;
             labelCountMove.Text = "Ты прошел уровень за " + count_Move + " шагов!";
         }
         private void ButtonNextLevel_Click(object sender, EventArgs e)
@@ -27,7 +29,7 @@ namespace GameSokobanFinal
                     Application.OpenForms[i].Close();
                 }
             }
-            LevelMenu gameform = new LevelMenu();
+            LevelMenu gameform = new LevelMenu(Name);
             gameform.Show();
         }
     }

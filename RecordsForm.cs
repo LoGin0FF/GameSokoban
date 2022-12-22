@@ -26,7 +26,6 @@ namespace GameSokobanFinal
         {
             this.Close();
         }
-
         private void UpdateScoreBoard()
         {
             string query = "SELECT * FROM scores ORDER BY Scores ASC";
@@ -52,15 +51,15 @@ namespace GameSokobanFinal
         {
             string filename = "recordsNew.dat";
             int Level = 0;
-            string Name = "Kirill";
+            string Name = "User";
             int Scores = 0;
 
-            using (BinaryReader read = new BinaryReader(File.Open(filename, FileMode.OpenOrCreate)))
+            using (BinaryReader read = new BinaryReader(File.Open(filename, FileMode.Open)))
             {
                 while (read.PeekChar() != -1)
                 {
-                    Level = read.ReadInt32();
                     Name = read.ReadString();
+                    Level = read.ReadInt32();
                     Scores = read.ReadInt32();
                 }
             }
@@ -73,7 +72,6 @@ namespace GameSokobanFinal
                 cmd.Parameters.Add("@Level", SqlDbType.Int).Value = Level;
                 cmd.Parameters.Add("@Name", SqlDbType.VarChar).Value = Name;
                 cmd.Parameters.Add("@Scores", SqlDbType.Int).Value = Scores;
-
                 try
                 {
                     con.Open();

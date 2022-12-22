@@ -52,6 +52,12 @@
     <Compile Include="CreateLevelForm.Designer.cs">
       <DependentUpon>CreateLevelForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormInputName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInputName.Designer.cs">
+      <DependentUpon>FormInputName.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </Compile>
     <EmbeddedResource Include="CreateLevelForm.resx">
       <DependentUpon>CreateLevelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInputName.resx">
+      <DependentUpon>FormInputName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>

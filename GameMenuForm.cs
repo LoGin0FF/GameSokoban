@@ -18,7 +18,7 @@ namespace GameSokobanFinal
         }
         private void ButtonStartGame_Click(object sender, EventArgs e)
         {
-            LevelMenu gameWindow = new LevelMenu();
+            FormInputName gameWindow = new FormInputName();
             gameWindow.Show();
         }
         private void ButtonExit_Click(object sender, EventArgs e)

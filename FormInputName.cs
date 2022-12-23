@@ -29,7 +29,6 @@ namespace GameSokobanFinal
         private void TextBoxName_TextChanged(object sender, EventArgs e)
         {
             Name = textBoxName.Text;
-            if (Name == "FormInputName") Name = "Guest";
         }
 
         private void PressTextBox(object sender, KeyPressEventArgs e)

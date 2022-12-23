@@ -19,7 +19,9 @@ namespace GameSokobanFinal
         public string Name;
     }
     public partial class GameForm : Form
-    {       
+    {
+        Info info = new Info();
+
         const int size = 50;
         public new const int Width = 1560;
         public new const int Height = 1120;
@@ -29,7 +31,6 @@ namespace GameSokobanFinal
         List<Bricks> bricks = new List<Bricks>();
         List<Wall> wall = new List<Wall>();
         List<Cross> cross = new List<Cross>();
-        Info info = new Info();
 
         bool flag = false; //для "анимации"
         int countFlag = 0;
@@ -40,19 +41,10 @@ namespace GameSokobanFinal
             timer.Tick += new System.EventHandler(Update);
 
             KeyDown += new KeyEventHandler(Press);
+
             LevelReference = Level;
             info.Level = lvl;
             info.Name = Name;
-
-            Init(Level);
-        }
-        public GameForm(string Level)
-        {
-            InitializeComponent();
-
-            timer.Tick += new System.EventHandler(Update);
-
-            KeyDown += new KeyEventHandler(Press);
 
             Init(Level);
         }
@@ -65,7 +57,7 @@ namespace GameSokobanFinal
         {
             Graphics graphics = e.Graphics;
 
-            graphics.DrawImage(player.playerImage, player.x, player.y, size, size); 
+            graphics.DrawImage(player.playerImage, player.x, player.y, size, size);
 
             foreach (var w in wall)
             {
@@ -148,7 +140,7 @@ namespace GameSokobanFinal
                     }
                     break;
                 case Keys.Escape:
-                    GameForm gameWindow = new GameForm(LevelReference);
+                    GameForm gameWindow = new GameForm(LevelReference, info.Level, Name);
                     this.Close();
                     gameWindow.Show();
                     break;
@@ -349,10 +341,10 @@ namespace GameSokobanFinal
             }
             if (flagWin == 1)//cross.Count)
             {
-                RecordsForm rf = new RecordsForm();
+                RecordsForm recordForms = new RecordsForm();
                 GameOverForm gameOver = new GameOverForm(ref info.Count_Move, info.Name);
                 RecordLevels();
-                rf.AddCurrentScores();
+                recordForms.AddCurrentScores();
                 gameOver.Show();
             }
         }

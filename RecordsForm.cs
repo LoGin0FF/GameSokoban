@@ -14,6 +14,7 @@ namespace GameSokobanFinal
 {
     public partial class RecordsForm : Form
     {
+        string password;
         static string path = Path.GetFullPath(Environment.CurrentDirectory);
         static string dataBaseName = "data.mdf";
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=" + path + @"\" + dataBaseName + "; Integrated Security=True;";
@@ -82,6 +83,31 @@ namespace GameSokobanFinal
                 {
                     throw;
                 }
+            }
+        }
+        private void ButtonDeleteRecords_Click(object sender, EventArgs e)
+        {
+            textBoxDelete.Show();
+            dataGridView1.Visible = false;
+        }
+        private void TextBoxDelete_TextChanged(object sender, EventArgs e)
+        {
+            password = textBoxDelete.Text;
+        }
+        private void PressTextBox(object sender, KeyPressEventArgs e)
+        {
+            if (password == "Введите пароль:15052003")
+            {
+                string query = "DELETE FROM scores";
+                using (SqlConnection con = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                MessageBox.Show("Рекорды успешно удалены!");
+                this.Close();
             }
         }
     }

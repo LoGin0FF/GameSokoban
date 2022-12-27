@@ -50,13 +50,16 @@ namespace GameSokobanFinal
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Info;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(103, 129);
+            this.dataGridView1.Location = new System.Drawing.Point(75, 123);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(427, 326);
+            this.dataGridView1.Size = new System.Drawing.Size(455, 331);
             this.dataGridView1.TabIndex = 4;
             // 
             // ButtonDeleteRecords
@@ -75,7 +78,7 @@ namespace GameSokobanFinal
             // textBoxDelete
             // 
             this.textBoxDelete.BackColor = System.Drawing.Color.White;
-            this.textBoxDelete.Location = new System.Drawing.Point(210, 279);
+            this.textBoxDelete.Location = new System.Drawing.Point(194, 271);
             this.textBoxDelete.Name = "textBoxDelete";
             this.textBoxDelete.Size = new System.Drawing.Size(212, 22);
             this.textBoxDelete.TabIndex = 6;

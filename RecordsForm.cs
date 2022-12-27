@@ -15,9 +15,9 @@ namespace GameSokobanFinal
     public partial class RecordsForm : Form
     {
         string password;
-        static string path = Path.GetFullPath(Environment.CurrentDirectory);
-        static string dataBaseName = "data.mdf";
-        string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=" + path + @"\" + dataBaseName + "; Integrated Security=True;";
+        static readonly string path = Path.GetFullPath(Environment.CurrentDirectory);
+        static readonly string dataBaseName = "data.mdf";
+        static readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=" + path + @"\" + dataBaseName + "; Integrated Security=True;";
         public RecordsForm()
         {
             InitializeComponent();
@@ -51,8 +51,8 @@ namespace GameSokobanFinal
         public void AddCurrentScores()
         {
             string filename = "recordsNew.dat";
-            int Level = 0;
             string Name = "User";
+            int Level = 0;
             int Scores = 0;
 
             using (BinaryReader read = new BinaryReader(File.Open(filename, FileMode.Open)))

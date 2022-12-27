@@ -113,11 +113,13 @@ namespace GameSokobanFinal
             this.ButtonCreateLevel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ButtonCreateLevel.Font = new System.Drawing.Font("Modern No. 20", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonCreateLevel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ButtonCreateLevel.Location = new System.Drawing.Point(157, 335);
+            this.ButtonCreateLevel.Location = new System.Drawing.Point(181, 335);
+            this.ButtonCreateLevel.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonCreateLevel.Name = "ButtonCreateLevel";
-            this.ButtonCreateLevel.Size = new System.Drawing.Size(286, 64);
+            this.ButtonCreateLevel.Size = new System.Drawing.Size(230, 71);
             this.ButtonCreateLevel.TabIndex = 4;
-            this.ButtonCreateLevel.Text = "Создание уровня";
+            this.ButtonCreateLevel.Text = "Создать уровень";
+            this.ButtonCreateLevel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.ButtonCreateLevel.UseVisualStyleBackColor = false;
             this.ButtonCreateLevel.Click += new System.EventHandler(this.ButtonCreateLevel_Click);
             // 

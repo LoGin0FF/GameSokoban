@@ -27,7 +27,7 @@ namespace GameSokobanFinal.Game
             int xTemp = x + dirX;
             int yTemp = y + dirY;
             bool flag = true;
-            if (xTemp <= GameForm.Width && xTemp >= 0 && (xTemp != bricks.x || yTemp != bricks.y))
+            if (xTemp <= GameForm.WIDTH && xTemp >= 0 && (xTemp != bricks.x || yTemp != bricks.y))
             {
                 for (int i = 0; i < wall.Count; i++)
                 {
@@ -39,7 +39,7 @@ namespace GameSokobanFinal.Game
                 }
                 if (flag) x = xTemp;
             }
-            if (yTemp <= GameForm.Height && yTemp >= 0 && (xTemp != bricks.x || yTemp != bricks.y))
+            if (yTemp <= GameForm.HEIGHT && yTemp >= 0 && (xTemp != bricks.x || yTemp != bricks.y))
             {
                 for (int i = 0; i < wall.Count; i++)
                 {

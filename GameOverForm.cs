@@ -14,11 +14,11 @@ namespace GameSokobanFinal
     public partial class GameOverForm : Form
     {
         public new string Name;
-        public GameOverForm(ref int count_Move, string Name)
+        public GameOverForm(int CountMove, string Name, int Level)
         {
             InitializeComponent();
             this.Name = Name;
-            labelCountMove.Text = "Ты прошел уровень за " + count_Move + " шагов!";
+            labelCountMove.Text = "Ты прошел уровень " + Level + " за " + CountMove + " шагов!";
         }
         private void ButtonNextLevel_Click(object sender, EventArgs e)
         {

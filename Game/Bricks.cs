@@ -26,9 +26,9 @@ namespace GameSokobanFinal.Game
         {
             int xTemp = x + dirX;
             int yTemp = y + dirY;
-            if (xTemp <= GameForm.Width && xTemp >= 0)
+            if (xTemp <= GameForm.WIDTH && xTemp >= 0)
                 x = xTemp;
-            if (yTemp <= GameForm.Height && yTemp >= 0)
+            if (yTemp <= GameForm.HEIGHT && yTemp >= 0)
                 y = yTemp;
         }
     }

@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameSokobanFinal.Game;
-
+using System.Text.Json;
 namespace GameSokobanFinal
 {
     struct Info
     {
-        public int Count_Move; //кол-во ходов (для рекордов)
+        public int CountMove; //кол-во ходов (для рекордов)
         public int Level; //запоминает уровень
         public string Name;
     }
@@ -22,19 +17,20 @@ namespace GameSokobanFinal
     {
         Info info = new Info();
 
-        const int size = 50;
-        public new const int Width = 1560;
-        public new const int Height = 1120;
-        private readonly string LevelReference;
+        const int SIZE = 50;
+        public const int WIDTH = 1560;
+        public const int HEIGHT = 1120;
+        private readonly string p_LevelReference;
 
         Player player;
         List<Bricks> bricks = new List<Bricks>();
         List<Wall> wall = new List<Wall>();
         List<Cross> cross = new List<Cross>();
 
-        bool flag = false; //для "анимации"
+        //для "анимации"
+        bool animationFlag = false; 
         int countFlag = 0;
-        public GameForm(string Level, int lvl, string Name)
+        public GameForm(string levelStringFile, int level, string Name)
         {
             InitializeComponent();
 
@@ -42,51 +38,52 @@ namespace GameSokobanFinal
 
             KeyDown += new KeyEventHandler(Press);
 
-            LevelReference = Level;
-            info.Level = lvl;
+            p_LevelReference = levelStringFile;
+            info.Level = level;
             info.Name = Name;
+            info.CountMove = 0;
 
-            Init(Level);
+            Init(levelStringFile);
         }
-        public void Init(string Level) //Инициализация игры, создание экземпляров класса
+        public void Init(string levelStringFile) //Инициализация игры, создание экземпляров класса
         {
-            LoadLevels(Level);
+            LoadLevels(levelStringFile);
             timer.Start();
         }
         private void OnPaint(object sender, PaintEventArgs e) //отрисовка
         {
             Graphics graphics = e.Graphics;
 
-            graphics.DrawImage(player.playerImage, player.x, player.y, size, size);
+            graphics.DrawImage(player.playerImage, player.x, player.y, SIZE, SIZE);
 
             foreach (var w in wall)
             {
-                graphics.DrawImage(w.wallImage, w.x, w.y, size, size); 
+                graphics.DrawImage(w.wallImage, w.x, w.y, SIZE, SIZE); 
             }
             foreach (var c in cross)
             {
-                graphics.DrawImage(c.crossImage, c.x, c.y, size, size); 
+                graphics.DrawImage(c.crossImage, c.x, c.y, SIZE, SIZE); 
             }
             foreach (var b in bricks)
             {
-                graphics.DrawImage(b.bricksImage, b.x, b.y, size, size);
+                graphics.DrawImage(b.bricksImage, b.x, b.y, SIZE, SIZE);
             }
         }
 
         private void Update(object sender, EventArgs e)
         {
             countFlag++;
-            if (flag)
+            if (animationFlag)
             {
                 for (int i = 0; i < bricks.Count; i++)
                     bricks[i].bricksImage = new Bitmap("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Image\\ChristmasTree.png");
-                if (countFlag > 10) { flag = false; countFlag = 0; }
+                if (countFlag > 10) { animationFlag = false; countFlag = 0; }
             }  
             else
             {
                 for (int i = 0; i < bricks.Count; i++)
                     bricks[i].bricksImage = new Bitmap("C:\\Users\\4859554\\source\\repos\\GameSokobanFinal\\GameSokobanFinal\\bin\\Debug\\Image\\CristmasTreeTwo.png");
-                if (countFlag > 10) {flag = true; countFlag = 0; }
+                if (countFlag > 10) {animationFlag = true; countFlag = 0; }
             }
 
             Invalidate();
@@ -140,7 +137,7 @@ namespace GameSokobanFinal
                     }
                     break;
                 case Keys.Escape:
-                    GameForm gameWindow = new GameForm(LevelReference, info.Level, Name);
+                    GameForm gameWindow = new GameForm(p_LevelReference, info.Level, Name);
                     this.Close();
                     gameWindow.Show();
                     break;
@@ -151,143 +148,90 @@ namespace GameSokobanFinal
 
         public int CheckMoveBox(char str)
         {
-            int flagMove;
             switch (str)
             {
                 case 'W':
-                    int i;
-                    int lengthWallCross = bricks.Count + wall.Count;
-                    int flag = 0; //0 - ящик вообще не двигали, 1 - ящик подвинули, 2 - ящик подвинуть нельзя
-                    for (i = 0; i < bricks.Count; i++) //проверка каждого ящика
-                    {
-                        if (player.y - 50 == bricks[i].y && player.x == bricks[i].x) //если игрок двигается "в ящик"
-                        {
-                            if (bricks[i].y == 0) { flag = 2; break; };
-                            flagMove = 0;
-                            for (int m = 0; m < bricks.Count; m++) //проверка ящика к другому ящику
-                            {
-                                if (bricks[i].y - 50 != bricks[m].y || bricks[m].x != bricks[i].x)
-                                    flagMove++;
-                                else break;
-                            }
-                            for (int c = 0; c < wall.Count; c++) //проверка ящика к стене
-                            {
-                                if (bricks[i].y - 50 != wall[c].y || wall[c].x != bricks[i].x)
-                                    flagMove++;
-                                else break;
-                            }
-                            if (flagMove == lengthWallCross)
-                            {
-                                bricks[i].Move(0, -50);
-                                flag = 1; //ящик подвинут
-                            }
-                            else flag = -1;
-                            break;
-                        }
-                    }
-                    if (flag == 1) return i - 1; //возвращаем индекс ящика, который подвинули
-                    else return flag;
+                    return CheckingBricksY(-50);
                 case 'S':
-                    int iS;
-                    int lengthWallCross_S = bricks.Count + wall.Count;
-                    int flagS = 0;
-                    for (iS = 0; iS < bricks.Count; iS++)
-                    {
-                        if (bricks[iS].y == Height) { flagS = 2; break; };
-                        if (player.y + 50 == bricks[iS].y && player.x == bricks[iS].x)
-                        {
-                            flagMove = 0;
-                            for (int m = 0; m < bricks.Count; m++)
-                            {
-                                if (bricks[iS].y + 50 != bricks[m].y || bricks[m].x != bricks[iS].x)
-                                    flagMove++;
-                                else break;
-                            }
-                            for (int c = 0; c < wall.Count; c++) //проверка ящика к стене
-                            {
-                                if (bricks[iS].y + 50 != wall[c].y || wall[c].x != bricks[iS].x)
-                                    flagMove++;
-                                else break;
-                            }
-                            if (flagMove == lengthWallCross_S)
-                            {
-                                bricks[iS].Move(0, 50);
-                                flagS = 1; //ящик подвинут
-                            }
-                            else flagS = -1;
-                        }
-                    }
-                    if (flagS == 1) return iS - 1; //возвращаем индекс ящика, который подвинули
-                    else return flagS;
+                    return CheckingBricksY(50);
                 case 'A':
-                    int iA;
-                    int lengthWallCross_A = bricks.Count + wall.Count;
-                    int flagA = 0;
-                    for (iA = 0; iA < bricks.Count; iA++)
-                    {
-                        if (bricks[iA].x == 0) { flagA = 2; break; };
-                        if (player.x - 50 == bricks[iA].x && player.y == bricks[iA].y)
-                        {
-                            flagMove = 0;
-                            for (int m = 0; m < bricks.Count; m++)
-                            {
-                                if (bricks[iA].x - 50 != bricks[m].x || bricks[m].y != bricks[iA].y)
-                                    flagMove++;
-                                else break;
-                            }
-                            for (int c = 0; c < wall.Count; c++) //проверка ящика к стене
-                            {
-                                if (bricks[iA].x - 50 != wall[c].x || wall[c].y != bricks[iA].y)
-                                    flagMove++;
-                                else break;
-                            }
-                            if (flagMove == lengthWallCross_A)
-                            {
-                                bricks[iA].Move(-50, 0);
-                                flagA = 1; //ящик подвинут
-                            }
-                            else flagA = -1;
-                        }
-                    }
-                    if (flagA == 1) return iA - 1; //возвращаем индекс ящика, который подвинули
-                    else return flagA;
+                    return CheckingBricksX(-50);
                 case 'D':
-                    int iD;
-                    int lengthWallCross_D = bricks.Count + wall.Count;
-                    int flagD = 0;
-                    for (iD = 0; iD < bricks.Count; iD++)
-                    {
-                        if (bricks[iD].x == Width) { flagD = 2; break; };
-                        if (player.x + 50 == bricks[iD].x && player.y == bricks[iD].y)
-                        {
-                            flagMove = 0;
-                            for (int m = 0; m < bricks.Count; m++)
-                            {
-                                if (bricks[iD].x + 50 != bricks[m].x || bricks[m].y != bricks[iD].y)
-                                    flagMove++;
-                                else break;
-                            }
-                            for (int c = 0; c < wall.Count; c++) //проверка ящика к стене
-                            {
-                                if (bricks[iD].x + 50 != wall[c].x || wall[c].y != bricks[iD].y)
-                                    flagMove++;
-                                else break;
-                            }
-                            if (flagMove == lengthWallCross_D)
-                            {
-                                bricks[iD].Move(50, 0);
-                                flagD = 1; //ящик подвинут
-                            }
-                            else flagD = -1;
-                        }
-
-                    }
-                    if (flagD == 1) return iD - 1; //возвращаем индекс ящика, который подвинули
-                    else return flagD;
+                    return CheckingBricksX(50);
             }
             return 0;
         }
 
+        public int CheckingBricksY(int yDir)
+        {
+            int i;
+            int flagMove;
+            int lengthBricksPlusWall = bricks.Count + wall.Count;
+            int flagMoveBricks = 0;
+            for (i = 0; i < bricks.Count; i++)
+            {
+                if (bricks[i].y == HEIGHT) { flagMoveBricks = 2; break; };
+                if (player.y + yDir == bricks[i].y && player.x == bricks[i].x)
+                {
+                    flagMove = 0;
+                    for (int j = 0; j < bricks.Count; j++)
+                    {
+                        if (bricks[i].y + yDir != bricks[j].y || bricks[j].x != bricks[i].x)
+                            flagMove++;
+                        else break;
+                    }
+                    for (int k = 0; k < wall.Count; k++) //проверка ящика к стене
+                    {
+                        if (bricks[i].y + yDir != wall[k].y || wall[k].x != bricks[i].x)
+                            flagMove++;
+                        else break;
+                    }
+                    if (flagMove == lengthBricksPlusWall)
+                    {
+                        bricks[i].Move(0, yDir);
+                        flagMoveBricks = 1; //ящик подвинут
+                    }
+                    else flagMoveBricks = -1;
+                }
+            }
+            if (flagMoveBricks == 1) return i - 1; //возвращаем индекс ящика, который подвинули
+            else return flagMoveBricks;
+        }
+        public int CheckingBricksX(int xDir)
+        {
+            int i;
+            int flagMove;
+            int lengthBricksPlusWall = bricks.Count + wall.Count;
+            int flagMoveBricks = 0;
+            for (i = 0; i < bricks.Count; i++)
+            {
+                if (bricks[i].x == WIDTH) { flagMoveBricks = 2; break; };
+                if (player.x + xDir == bricks[i].x && player.y == bricks[i].y)
+                {
+                    flagMove = 0;
+                    for (int j = 0; j < bricks.Count; j++)
+                    {
+                        if (bricks[i].x + xDir != bricks[j].x || bricks[j].y != bricks[i].y)
+                            flagMove++;
+                        else break;
+                    }
+                    for (int k = 0; k < wall.Count; k++) //проверка ящика к стене
+                    {
+                        if (bricks[i].x + xDir != wall[k].x || wall[k].y != bricks[i].y)
+                            flagMove++;
+                        else break;
+                    }
+                    if (flagMove == lengthBricksPlusWall)
+                    {
+                        bricks[i].Move(xDir, 0);
+                        flagMoveBricks = 1; //ящик подвинут
+                    }
+                    else flagMoveBricks = -1;
+                }
+            }
+            if (flagMoveBricks == 1) return i - 1; //возвращаем индекс ящика, который подвинули
+            else return flagMoveBricks;
+        }
         public void LoadLevels(string filename)
         {
             if (File.Exists(filename))
@@ -339,10 +283,10 @@ namespace GameSokobanFinal
                     }
                 }
             }
-            if (flagWin == 1)//cross.Count)
+            if (flagWin == cross.Count)
             {
                 RecordsForm recordForms = new RecordsForm();
-                GameOverForm gameOver = new GameOverForm(ref info.Count_Move, info.Name);
+                GameOverForm gameOver = new GameOverForm(info.CountMove, info.Name, info.Level);
                 RecordLevels();
                 recordForms.AddCurrentScores();
                 gameOver.Show();
@@ -357,13 +301,13 @@ namespace GameSokobanFinal
                 {
                     write.Write(info.Name);
                     write.Write(info.Level);
-                    write.Write(info.Count_Move);
+                    write.Write(info.CountMove);
                 }
-            }
+            }  
         }
         public void Movement()
         {
-            CountMove.Text = "Шагов: " + ++info.Count_Move;
+            CountMove.Text = "Шагов: " + ++info.CountMove;
         }
     }
 }

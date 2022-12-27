@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.Json;
+using static GameSokobanFinal.GameForm;
 
 namespace GameSokobanFinal
 {
@@ -48,21 +50,18 @@ namespace GameSokobanFinal
             }
         }
 
-        public void AddCurrentScores()
+        public void AddCurrentScores(string FILENAME)
         {
-            string filename = "recordsNew.dat";
-            string Name = "User";
-            int Level = 0;
-            int Scores = 0;
+            string Name;
+            int Level;
+            int Scores;
 
-            using (BinaryReader read = new BinaryReader(File.Open(filename, FileMode.Open)))
+            using (FileStream fs = new FileStream(FILENAME, FileMode.Open))
             {
-                while (read.PeekChar() != -1)
-                {
-                    Name = read.ReadString();
-                    Level = read.ReadInt32();
-                    Scores = read.ReadInt32();
-                }
+                Info info2 = JsonSerializer.Deserialize<Info>(fs);
+                Level = info2.Level;
+                Name = info2.Name;
+                Scores = info2.CountMove;
             }
             string query = "INSERT INTO scores(Date,Level,Name,Scores) VALUES(@Date,@Level,@Name,@Scores);";
 

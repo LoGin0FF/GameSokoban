@@ -5,17 +5,32 @@ using System.IO;
 using System.Windows.Forms;
 using GameSokobanFinal.Game;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+
+
+
 namespace GameSokobanFinal
 {
-    struct Info
-    {
-        public int CountMove; //кол-во ходов (для рекордов)
-        public int Level; //запоминает уровень
-        public string Name;
-    }
     public partial class GameForm : Form
     {
-        Info info = new Info();
+        public class Info
+        {
+            public int CountMove { get; private set; } //кол-во ходов (для рекордов)
+            public int SetCountMove()
+            {
+                return ++CountMove;
+            }
+            public int Level { get; private set; } //запоминает уровень
+            public string Name { get; private set; }
+            [JsonConstructor]
+            public Info(int CountMove, int Level, string Name)
+            {
+                this.CountMove = CountMove;
+                this.Level = Level;
+                this.Name = Name;
+            }
+        }
+        Info info;
 
         const int SIZE = 50;
         public const int WIDTH = 1560;
@@ -39,9 +54,8 @@ namespace GameSokobanFinal
             KeyDown += new KeyEventHandler(Press);
 
             p_LevelReference = levelStringFile;
-            info.Level = level;
-            info.Name = Name;
-            info.CountMove = 0;
+
+            info = new Info(0, level, Name);
 
             Init(levelStringFile);
         }
@@ -69,7 +83,6 @@ namespace GameSokobanFinal
                 graphics.DrawImage(b.bricksImage, b.x, b.y, SIZE, SIZE);
             }
         }
-
         private void Update(object sender, EventArgs e)
         {
             countFlag++;
@@ -283,31 +296,26 @@ namespace GameSokobanFinal
                     }
                 }
             }
-            if (flagWin == cross.Count)
+            if (flagWin == 1)//cross.Count)
             {
                 RecordsForm recordForms = new RecordsForm();
                 GameOverForm gameOver = new GameOverForm(info.CountMove, info.Name, info.Level);
-                RecordLevels();
-                recordForms.AddCurrentScores();
+                recordForms.AddCurrentScores(RecordLevels());
                 gameOver.Show();
             }
         }
-        public void RecordLevels()
+        public string RecordLevels()
         {
-            string filename = "recordsNew.dat";
-            if (File.Exists(filename))
+            const string FILENAME = "recordsNew.json";
+            using (FileStream fs = new FileStream(FILENAME, FileMode.OpenOrCreate))
             {
-                using (BinaryWriter write = new BinaryWriter(File.Open(filename, FileMode.Open)))
-                {
-                    write.Write(info.Name);
-                    write.Write(info.Level);
-                    write.Write(info.CountMove);
-                }
-            }  
+                JsonSerializer.Serialize<Info>(fs, info);
+            }
+            return FILENAME;
         }
         public void Movement()
         {
-            CountMove.Text = "Шагов: " + ++info.CountMove;
+            CountMove.Text = "Шагов: " + info.SetCountMove();
         }
     }
 }
